@@ -1,7 +1,8 @@
-# name 1:
-# name 2:
+# name 1: Daniel Ma
+# name 2: Tyler Stratton
 # name 3:
 
+from sklearn.linear_model import LinearRegression
 
 class LRsentenceQuality():
     def __init__(self):
