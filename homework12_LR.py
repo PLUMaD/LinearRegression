@@ -9,7 +9,9 @@ class LRsentenceQuality():
     def __init__(self):
         # do some initialization, optional
         self.data = []
-        self.x_train = 0
+        self.quality = []
+        self.x = []
+        self.y = 0
         pass
     
     def trainLR(self, trainingData, LRmodel):
@@ -20,10 +22,31 @@ class LRsentenceQuality():
             # Read the traingData
             for line in file:
                 self.data.append([item for item in line.split()]) # Add a given row of data into the data list
+                
+                self.quality.append(self.evalQuality(self.data[-1])) # Take the last element of data and get the evaluation
+            # Prepare a numpy array to give to knn
+            # Fill the y values
+            self.y = numpy.array(self.quality)
+            # Fill the x values
+            for line in self.data:
+                temp = line[1:]
+                self.x.append(temp)
+            self.x = numpy.array(self.x)
+            
             # Construct model
             lm=LinearRegression()
-            lm.fit(X_train, y_train)
+            lm.fit(self.x, self.y)
         pass
+
+    def evalQuality(self, line:list):
+            # Given a list of scores
+            # return a quality rating
+            if line[0] < 0.4:
+                return -1 # Low Quality
+            elif line[0] < 0.7:
+                return 0 # Medium Quality
+            else:
+                return 1 # High Quality
 
     def Quality_LR(self, sentence, LRmodel):
         # please implement this function to classify the sentence into three different classes: high, low, and medium quality
