@@ -2,15 +2,27 @@
 # name 2: Tyler Stratton
 # name 3:
 
+from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
 class LRsentenceQuality():
     def __init__(self):
         # do some initialization, optional
+        self.data = []
+        self.x_train = 0
         pass
+    
     def trainLR(self, trainingData, LRmodel):
         # traing a LR model on the training dataset, your group should find a training dataset with three different qualities
-
+        with open(trainingData, 'r') as file:
+            file.readline() # skip a line for the header
+            
+            # Read the traingData
+            for line in file:
+                self.data.append([item for item in line.split()]) # Add a given row of data into the data list
+            # Construct model
+            lm=LinearRegression()
+            lm.fit(X_train, y_train)
         pass
 
     def Quality_LR(self, sentence, LRmodel):
