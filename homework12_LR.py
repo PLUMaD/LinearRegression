@@ -59,10 +59,10 @@ class LRsentenceQuality():
         # notes: you can reuse the code from the class about LR, and you can add more functions in this class as needed
         obj = sentenceQuality()
         sen = obj.calculateScores(sentence)
-        y_pred = LRmodel.predict(sen)
+        y_pred = LRmodel.predict(numpy.array([sen]))
 
 
-        return y_pred
+        return self.evalQuality(y_pred)
         pass
 
 class sentenceQuality():
@@ -135,7 +135,7 @@ class sentenceQuality():
 
 # this is for testing only
 obj = LRsentenceQuality()
-s = "DATA 233 is a wonderful class!"
+s = "DATA 233 is an amazing class, and I'm going to be taking this professor's class again."
 model = None
 model = obj.trainLR("trainWord.txt", model)
 
