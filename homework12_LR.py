@@ -145,10 +145,18 @@ model = obj.trainLR("trainWord.txt", model)
 
 print("The final quality for your input using LR is " + str(obj.Quality_LR(s, model)))
 
+def qual(score):
+    if score < 0.4:
+        return -1
+    elif score < 0.7:
+        return 0
+    else:
+        return 1
+
 with open('testWord.txt', 'r') as file:
     foo = []
     for line in file:
         foo.append([float(item) for item in line.split()])
     #print(foo)
     for scores in foo:
-        print("The final estimated quality for your input using LR is " + str(model.predict(numpy.array([scores[1:]]))) + ", and the actual is " + str(scores[0]))
+        print("The final estimated quality for your input using LR is " + str(qual(model.predict(numpy.array([scores[1:]])))) + ", and the actual is " + str(qual(scores[0])))
