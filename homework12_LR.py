@@ -5,6 +5,8 @@
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 import numpy
+from textblob import TextBlob
+import math
 
 class LRsentenceQuality():
     def __init__(self):
@@ -54,11 +56,15 @@ class LRsentenceQuality():
         # Input: sentence
         # output: -1 means low quality, 0 means medium quality, 1 means high quality
         # notes: you can reuse the code from the class about LR, and you can add more functions in this class as needed
+        obj = sentenceQuality()
+        sen = obj.calculateScores(sentence)
+        y_pred = LRmodel.predict(sen)
 
-        return 0
+
+        return y_pred
         pass
 
-    class sentenceQuality():
+class sentenceQuality():
         def __init__(self):
             # do some initialization, optional
             pass
@@ -129,5 +135,7 @@ class LRsentenceQuality():
 # this is for testing only
 obj = LRsentenceQuality()
 s = "DATA 233 is a wonderful class!"
+model = None
+model = obj.trainLR(trainingData="trainWord.txt")
 
-print("The final quality for your input using LR is " + str(obj.Quality_LR(s)))
+print("The final quality for your input using LR is " + str(obj.Quality_LR(s, model)))
