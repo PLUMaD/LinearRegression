@@ -57,13 +57,17 @@ class LRsentenceQuality():
         # Input: sentence
         # output: -1 means low quality, 0 means medium quality, 1 means high quality
         # notes: you can reuse the code from the class about LR, and you can add more functions in this class as needed
-        obj = sentenceQuality()
-        sen = obj.calculateScores(sentence)
+        sen = self.sentenceScores(sentence)
         y_pred = LRmodel.predict(numpy.array([sen]))
 
 
         return self.evalQuality(y_pred)
         pass
+
+    def sentenceScores(self, sentence):
+        obj = sentenceQuality()
+        sen = obj.calculateScores(sentence)
+        return sen
 
 class sentenceQuality():
         def __init__(self):
@@ -140,3 +144,7 @@ model = None
 model = obj.trainLR("trainWord.txt", model)
 
 print("The final quality for your input using LR is " + str(obj.Quality_LR(s, model)))
+
+with open('testWord.txt', 'r') as file:
+    for line in file:
+        print("The final estimated quality for your input using LR is " + str(model.predict(numpy.array([line[1:]]))))
