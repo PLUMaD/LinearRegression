@@ -146,5 +146,9 @@ model = obj.trainLR("trainWord.txt", model)
 print("The final quality for your input using LR is " + str(obj.Quality_LR(s, model)))
 
 with open('testWord.txt', 'r') as file:
+    foo = []
     for line in file:
-        print("The final estimated quality for your input using LR is " + str(model.predict(numpy.array([line[1:]]))))
+        foo.append([float(item) for item in line.split()])
+    #print(foo)
+    for scores in foo:
+        print("The final estimated quality for your input using LR is " + str(model.predict(numpy.array([scores[1:]]))))
