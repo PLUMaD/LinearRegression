@@ -39,6 +39,7 @@ class LRsentenceQuality():
             # Construct model
             lm=LinearRegression()
             lm.fit(self.x, self.y)
+            return lm
         pass
 
     def evalQuality(self, line:list):
