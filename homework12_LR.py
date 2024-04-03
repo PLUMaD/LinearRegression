@@ -45,9 +45,9 @@ class LRsentenceQuality():
     def evalQuality(self, line:list):
             # Given a list of scores
             # return a quality rating
-            if line[0] < 0.4:
+            if float(line[0]) < 0.4:
                 return -1 # Low Quality
-            elif line[0] < 0.7:
+            elif float(line[0]) < 0.7:
                 return 0 # Medium Quality
             else:
                 return 1 # High Quality
@@ -137,6 +137,6 @@ class sentenceQuality():
 obj = LRsentenceQuality()
 s = "DATA 233 is a wonderful class!"
 model = None
-model = obj.trainLR(trainingData="trainWord.txt")
+model = obj.trainLR("trainWord.txt", model)
 
 print("The final quality for your input using LR is " + str(obj.Quality_LR(s, model)))
