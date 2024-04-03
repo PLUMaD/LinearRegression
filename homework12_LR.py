@@ -151,4 +151,4 @@ with open('testWord.txt', 'r') as file:
         foo.append([float(item) for item in line.split()])
     #print(foo)
     for scores in foo:
-        print("The final estimated quality for your input using LR is " + str(model.predict(numpy.array([scores[1:]]))))
+        print("The final estimated quality for your input using LR is " + str(model.predict(numpy.array([scores[1:]]))) + ", and the actual is " + str(scores[0]))
