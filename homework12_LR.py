@@ -24,7 +24,7 @@ class LRsentenceQuality():
             
             # Read the traingData
             for line in file:
-                self.data.append([item for item in line.split()]) # Add a given row of data into the data list
+                self.data.append([float(item) for item in line.split()]) # Add a given row of data into the data list
                 
                 self.quality.append(self.evalQuality(self.data[-1])) # Take the last element of data and get the evaluation
             # Prepare a numpy array to give to knn
